@@ -1,0 +1,5 @@
+-- Write your PostgreSQL query statement below
+with cte as (select id,recordDate, lag(temperature) over(order by recordDate) as prev_day, lag(recordDate) over (order by recordDate) as prev_date, temperature 
+from weather)
+
+select id from cte where recordDate - prev_date =1 and temperature - prev_day > 0
