@@ -1,0 +1,6 @@
+-- Write your PostgreSQL query statement below
+with res as (select d.name as Department, e.name as Employee, e.salary as Salary, dense_rank() over (partition by d.id order by e.salary desc) as rnk
+from employee e join department d on e.departmentid = d.id
+order by e.salary )
+select Department, Employee, Salary from res where rnk <=3
+order by 3 desc
