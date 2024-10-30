@@ -1,8 +1,10 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        robb1 = robb2 = 0
-
-        for i in nums:
-            rob_val = max(robb1+i, robb2)
-            robb1,robb2 = robb2, rob_val
-        return rob_val
+        n = len(nums)
+        dp = [0] * (n + 1)
+        dp[1] = nums[0]
+        for i in range(2,n + 1):
+            print(dp[i-1], dp[i-2],nums[i-1])
+            dp[i] = max(dp[i-1], dp[i-2] + nums[i-1])
+        
+        return dp[n]
